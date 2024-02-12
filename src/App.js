@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 
 function MapboxComponent() {
   const [selectedPin, setSelectedPin] = useState("");
+  const [flights, setFlights] = useState([]);
 
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnJhbmNpc2NvY2FsZGFzIiwiYSI6ImNsc2Y5MDYyNzFhNnUyamw1bjhsbTc3bjAifQ.4ypYMELBLioE2ZVgf9pfjA';
@@ -100,19 +101,41 @@ function MapboxComponent() {
                 'line-width': 2
               }
             });
+            fetch(`flights_${1}.json`)
+              .then(response =>console.log(response))
 
             map.on('click', 'places-' + place.properties.title, function (e) {
               setSelectedPin(e.features[0]);
+              fetchFlights(e.features[0].id);
             });
           });
         });
     });
   }, []);
 
+  const fetchFlights = (destinationId) => {
+    let pth = `flights_data/flights_${destinationId}.json`
+    console.log(pth)
+    fetch(pth)
+    .then(response => {
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      setFlights(data.flights);
+    })
+    .catch(error => {
+      console.error('Error fetching flights:', error);
+    });
+  };
+
   return (
     <div>
       <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '80%' }}></div>
-      <Sidebar selectedPin={selectedPin} />
+      <Sidebar selectedPin={selectedPin}  flights={flights}/>
     </div>
   );
 }
