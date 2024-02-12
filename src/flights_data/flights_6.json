@@ -1,0 +1,19 @@
+{
+    "flights": [
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Naples",
+        "departure_time": "2024-02-16T09:00:00",
+        "arrival_time": "2024-02-16T11:30:00",
+        "price": 300
+      },
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Naples",
+        "departure_time": "2024-02-18T11:30:00",
+        "arrival_time": "2024-02-18T14:00:00",
+        "price": 320
+      }
+    ]
+  }
+  

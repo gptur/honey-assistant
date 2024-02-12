@@ -1,0 +1,19 @@
+{
+    "flights": [
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Osaka",
+        "departure_time": "2024-02-15T11:00:00",
+        "arrival_time": "2024-02-15T19:30:00",
+        "price": 1500
+      },
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Osaka",
+        "departure_time": "2024-02-17T12:30:00",
+        "arrival_time": "2024-02-17T21:00:00",
+        "price": 1550
+      }
+    ]
+  }
+  

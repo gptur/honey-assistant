@@ -1,0 +1,19 @@
+{
+    "flights": [
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Denpasar",
+        "departure_time": "2024-02-15T08:00:00",
+        "arrival_time": "2024-02-15T22:00:00",
+        "price": 1200
+      },
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Denpasar",
+        "departure_time": "2024-02-17T10:30:00",
+        "arrival_time": "2024-02-17T23:30:00",
+        "price": 1250
+      }
+    ]
+  }
+  
