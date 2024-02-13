@@ -1,0 +1,19 @@
+{
+    "flights": [
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "San José",
+        "departure_time": "2024-02-16T08:00:00",
+        "arrival_time": "2024-02-16T20:00:00",
+        "price": 2000
+      },
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "San José",
+        "departure_time": "2024-02-18T09:30:00",
+        "arrival_time": "2024-02-18T21:30:00",
+        "price": 2050
+      }
+    ]
+  }
+  

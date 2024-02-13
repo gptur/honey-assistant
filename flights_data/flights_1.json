@@ -1,0 +1,19 @@
+{
+    "flights": [
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Malé",
+        "departure_time": "2024-02-15T08:00:00",
+        "arrival_time": "2024-02-15T20:00:00",
+        "price": 1500
+      },
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Malé",
+        "departure_time": "2024-02-17T09:30:00",
+        "arrival_time": "2024-02-17T21:30:00",
+        "price": 1600
+      }
+    ]
+  }
+  

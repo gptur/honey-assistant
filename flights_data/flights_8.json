@@ -1,0 +1,19 @@
+{
+    "flights": [
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Victoria",
+        "departure_time": "2024-02-15T13:00:00",
+        "arrival_time": "2024-02-15T23:00:00",
+        "price": 1700
+      },
+      {
+        "departure_city": "Lisbon",
+        "destination_city": "Victoria",
+        "departure_time": "2024-02-17T14:30:00",
+        "arrival_time": "2024-02-18T00:30:00",
+        "price": 1750
+      }
+    ]
+  }
+  
