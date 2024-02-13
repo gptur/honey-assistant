@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Sidebar from './Sidebar';
+import { fetchFlightOffers } from './FlightAPI';
+import airportCodes from './airport_codes.json';
 
 function MapboxComponent() {
   const [selectedPin, setSelectedPin] = useState("");
@@ -107,30 +109,46 @@ function MapboxComponent() {
             map.on('click', 'places-' + place.properties.title, function (e) {
               setSelectedPin(e.features[0]);
               fetchFlights(e.features[0].id);
+
+
             });
           });
         });
     });
   }, []);
 
-  const fetchFlights = (destinationId) => {
-    let pth = `flights_data/flights_${destinationId}.json`
-    console.log(pth)
-    fetch(pth)
-    .then(response => {
-      
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      setFlights(data.flights);
-    })
-    .catch(error => {
-      console.error('Error fetching flights:', error);
-    });
+  const fetchFlights = async (destinationId) => {
+    try {
+      const originCode = 'LIS'; // Assuming Lisbon is the origin
+      const destinationCode = airportCodes.codes[destinationId];
+      const departureDate = '2024-02-15'; // Example departure date
+      const maxPrice = 250; // Example maximum price
+
+      const data = await fetchFlightOffers(originCode, destinationCode, departureDate, maxPrice);
+      setFlights(data.data);
+    } catch (error) {
+      console.error('Error fetching flight offers:', error);
+    }
   };
+
+  // const fetchFlights = (destinationId) => {
+  //   let pth = `flights_data/flights_${destinationId}.json`
+  //   console.log(pth)
+  //   fetch(pth)
+  //   .then(response => {
+      
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     return response.json();
+  //   })
+  //   .then(data => {
+  //     setFlights(data.flights);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching flights:', error);
+  //   });
+  // };
 
   return (
     <div>
