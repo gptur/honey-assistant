@@ -3,10 +3,14 @@ import mapboxgl from 'mapbox-gl';
 import Sidebar from './Sidebar';
 import { fetchFlightOffers } from './FlightAPI';
 import airportCodes from './airport_codes.json';
+import TopBar from './TopBar';
 
 function MapboxComponent() {
   const [selectedPin, setSelectedPin] = useState("");
   const [flights, setFlights] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnJhbmNpc2NvY2FsZGFzIiwiYSI6ImNsc2Y5MDYyNzFhNnUyamw1bjhsbTc3bjAifQ.4ypYMELBLioE2ZVgf9pfjA';
@@ -103,57 +107,44 @@ function MapboxComponent() {
                 'line-width': 2
               }
             });
-            fetch(`flights_${1}.json`)
-              .then(response =>console.log(response))
 
             map.on('click', 'places-' + place.properties.title, function (e) {
               setSelectedPin(e.features[0]);
               fetchFlights(e.features[0].id);
-
-
             });
           });
+
+          setLoading(false); // Set loading to false after data is loaded
         });
     });
   }, []);
 
   const fetchFlights = async (destinationId) => {
     try {
+      setLoading(true)
       const originCode = 'LIS'; // Assuming Lisbon is the origin
       const destinationCode = airportCodes.codes[destinationId];
-      const departureDate = '2024-02-15'; // Example departure date
       const maxPrice = 250; // Example maximum price
 
-      const data = await fetchFlightOffers(originCode, destinationCode, departureDate, maxPrice);
+      // Example dates (use startDate and endDate state values instead)
+      const departureDate = startDate || '2024-07-15';
+      const returnDate = endDate || '2024-07-20';
+
+      const data = await fetchFlightOffers(originCode, destinationCode, departureDate, returnDate, maxPrice);
+      setLoading(false)
       setFlights(data.data);
     } catch (error) {
       console.error('Error fetching flight offers:', error);
     }
   };
 
-  // const fetchFlights = (destinationId) => {
-  //   let pth = `flights_data/flights_${destinationId}.json`
-  //   console.log(pth)
-  //   fetch(pth)
-  //   .then(response => {
-      
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     return response.json();
-  //   })
-  //   .then(data => {
-  //     setFlights(data.flights);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error fetching flights:', error);
-  //   });
-  // };
-
   return (
     <div>
-      <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '80%' }}></div>
-      <Sidebar selectedPin={selectedPin}  flights={flights}/>
+      <div id="map" style={{ position: 'absolute', top: '50px', bottom: 0, width: '80%' }}></div>
+
+                  <Sidebar selectedPin={selectedPin} flights={flights} loading={loading}/>
+                  <TopBar className="top-bar" startDate={startDate} endDate={endDate} onStartDateChange={setStartDate} onEndDateChange={setEndDate} fetchFlights={fetchFlights} selectedPin_id={selectedPin.id}/>
+
     </div>
   );
 }

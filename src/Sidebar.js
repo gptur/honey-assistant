@@ -28,17 +28,32 @@ function Flight({ flight }) {
   );
 }
 
-function Sidebar({ selectedPin, flights }) {
+function LoadingAnimation() {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  );
+}
+
+
+function Sidebar({ selectedPin, flights, loading , startDate, endDate }) {
   return (
     <div style={{ position: 'absolute', top: 0, right: 0, width: '20%', height: '100%', backgroundColor: 'lightgray', padding: '10px', overflowY: 'scroll' }}>
-      {selectedPin && (
-        <div>
-          <h2>{selectedPin.properties.title}</h2>
-          <h3>Flights:</h3>
-          {flights.map((flight, index) => (
-            <Flight key={index} flight={flight} />
-          ))}
-        </div>
+      {loading ? (
+        <LoadingAnimation />
+      ) : (
+        selectedPin && (
+          <div>
+            <h2>{selectedPin.properties.title}</h2>
+            <h3>Flights:</h3>
+            {flights.map((flight, index) => (
+              <Flight key={index} flight={flight} />
+            ))}
+          </div>
+        )
       )}
     </div>
   );
