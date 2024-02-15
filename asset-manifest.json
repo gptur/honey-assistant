@@ -1,18 +1,22 @@
 {
   "files": {
-    "main.css": "/honey-assistant/static/css/main.29eb5f56.css",
-    "main.js": "/honey-assistant/static/js/main.148f70e1.js",
+    "main.css": "/honey-assistant/static/css/main.684e787f.css",
+    "main.js": "/honey-assistant/static/js/main.daffed95.js",
     "static/js/592.de6bc53b.chunk.js": "/honey-assistant/static/js/592.de6bc53b.chunk.js",
+    "static/media/Inter-Regular.ttf": "/honey-assistant/static/media/Inter-Regular.fd272b9e3ca9b73890cb.ttf",
     "static/media/Gilroy-Medium.ttf": "/honey-assistant/static/media/Gilroy-Medium.1b4da6582f83f45ea039.ttf",
     "static/media/glendale2.ttf": "/honey-assistant/static/media/glendale2.6582afa67c1d11778719.ttf",
     "static/media/airplane.svg": "/honey-assistant/static/media/airplane.1fecae228df41c770f56464bbc473375.svg",
+    "static/media/calendar_ico.svg": "/honey-assistant/static/media/calendar_ico.3af395cd00d0b9e1238558252e298b00.svg",
+    "static/media/person_ico.svg": "/honey-assistant/static/media/person_ico.ad621e0363089ed5ab7186f5c4ad54a2.svg",
     "index.html": "/honey-assistant/index.html",
-    "main.29eb5f56.css.map": "/honey-assistant/static/css/main.29eb5f56.css.map",
-    "main.148f70e1.js.map": "/honey-assistant/static/js/main.148f70e1.js.map",
+    "static/media/arrow_down_ico.svg": "/honey-assistant/static/media/arrow_down_ico.44d70733ce0fae863b10f2a1c333ccdd.svg",
+    "main.684e787f.css.map": "/honey-assistant/static/css/main.684e787f.css.map",
+    "main.daffed95.js.map": "/honey-assistant/static/js/main.daffed95.js.map",
     "592.de6bc53b.chunk.js.map": "/honey-assistant/static/js/592.de6bc53b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.29eb5f56.css",
-    "static/js/main.148f70e1.js"
+    "static/css/main.684e787f.css",
+    "static/js/main.daffed95.js"
   ]
 }
