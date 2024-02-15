@@ -3,21 +3,23 @@ import mapboxgl from 'mapbox-gl';
 import Sidebar from './Sidebar';
 import { fetchFlightOffers } from './FlightAPI';
 import airportCodes from './airport_codes.json';
+
 import TopBar from './TopBar';
+
 
 function MapboxComponent() {
   const [selectedPin, setSelectedPin] = useState("");
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState( '');
+  const [endDate, setEndDate] = useState( '');
 
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnJhbmNpc2NvY2FsZGFzIiwiYSI6ImNsc2Y5MDYyNzFhNnUyamw1bjhsbTc3bjAifQ.4ypYMELBLioE2ZVgf9pfjA';
 
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/franciscocaldas/clsmc2pye003401pkciheh8y9',
       center: [-9.1406, 38.7223], // Lisbon
       zoom: 1.5
     });
@@ -31,7 +33,9 @@ function MapboxComponent() {
       });
 
       fetch('places.json')
-        .then(response => response.json())
+        .then(function(response){
+          return response.json()
+        })
         .then(data => {
           var places = data.features;
 
@@ -119,28 +123,45 @@ function MapboxComponent() {
     });
   }, []);
 
-  const fetchFlights = async (destinationId) => {
-    try {
-      setLoading(true)
-      const originCode = 'LIS'; // Assuming Lisbon is the origin
-      const destinationCode = airportCodes.codes[destinationId];
-      const maxPrice = 250; // Example maximum price
 
-      // Example dates (use startDate and endDate state values instead)
-      const departureDate = startDate || '2024-07-15';
-      const returnDate = endDate || '2024-07-20';
+const fetchFlights = async (destinationId) => {
+  try {
+    setLoading(true);
 
-      const data = await fetchFlightOffers(originCode, destinationCode, departureDate, returnDate, maxPrice);
-      setLoading(false)
-      setFlights(data.data);
-    } catch (error) {
-      console.error('Error fetching flight offers:', error);
+    // Create an instance of AbortController
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    const originCode = 'LIS'; // Assuming Lisbon is the origin
+    const destinationCode = airportCodes.codes[destinationId];
+    const maxPrice = 250; // Example maximum price
+
+    // Example dates (use startDate and endDate state values instead)
+    const departureDate = startDate || '2024-07-15';
+    const returnDate = endDate || '2024-07-20';
+
+    // Check if there's an ongoing fetch, if yes, abort it
+    if (fetchFlights.currentRequest) {
+      fetchFlights.currentRequest.abort();
     }
-  };
+
+    // Store the current fetch request
+    fetchFlights.currentRequest = abortController;
+
+    const data = await fetchFlightOffers(originCode, destinationCode, departureDate, returnDate, maxPrice, signal);
+    setLoading(false);
+    setFlights(data.data);
+
+  } catch (error) {
+    console.error('Error fetching flight offers:', error);
+  }
+};
+
+
 
   return (
     <div>
-      <div id="map" style={{ position: 'absolute', top: '50px', bottom: 0, width: '80%' }}></div>
+      <div id="map" style={{ position: 'fixed', top: '119px', bottom: 0, left: 0, right:"308px"  }}></div>
 
                   <Sidebar selectedPin={selectedPin} flights={flights} loading={loading}/>
                   <TopBar className="top-bar" startDate={startDate} endDate={endDate} onStartDateChange={setStartDate} onEndDateChange={setEndDate} fetchFlights={fetchFlights} selectedPin_id={selectedPin.id}/>

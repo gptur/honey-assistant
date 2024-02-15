@@ -1,0 +1,1 @@
+{"last_found_secrets": [{"name": "Generic High Entropy Secret - commit://staged/src/FlightAPI.js", "match": "6152bebdf2c2e83f5749c0f5822229b7b17b858854b5fd3d782bb25c951cd3eb"}, {"name": "RapidAPI Key - commit://staged/src/fetchFlights.js", "match": "3141511c37423f8646dbf390371e30d0394c96d013d3dbee764342925c10322e"}]}

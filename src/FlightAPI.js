@@ -1,11 +1,12 @@
-const fetchFlightOffers = async (originCode, destinationCode, departureDate, maxPrice) => {
+const fetchFlightOffers = async (originCode, destinationCode, departureDate, returnDate, maxPrice, signal) => {
     const token = await fetchAccessToken();
-    const url = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${originCode}&destinationLocationCode=${destinationCode}&departureDate=${departureDate}&adults=1&nonStop=false&max=${maxPrice}`;
+    const url = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${originCode}&destinationLocationCode=${destinationCode}&departureDate=${departureDate}&returnDate=${returnDate}&adults=1&nonStop=false&max=10`;
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
-      }
+      },
+      signal: signal // Pass the signal to the fetch options
     });
     if (!response.ok) {
       throw new Error(`Failed to fetch flight offers: ${response.status}`);
