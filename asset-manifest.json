@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/honey-assistant/static/css/main.e6c13ad2.css",
-    "main.js": "/honey-assistant/static/js/main.137c789a.js",
+    "main.css": "/honey-assistant/static/css/main.29eb5f56.css",
+    "main.js": "/honey-assistant/static/js/main.bc2ea6b0.js",
     "static/js/592.de6bc53b.chunk.js": "/honey-assistant/static/js/592.de6bc53b.chunk.js",
+    "static/media/Gilroy-Medium.ttf": "/honey-assistant/static/media/Gilroy-Medium.1b4da6582f83f45ea039.ttf",
+    "static/media/glendale2.ttf": "/honey-assistant/static/media/glendale2.6582afa67c1d11778719.ttf",
     "index.html": "/honey-assistant/index.html",
-    "main.e6c13ad2.css.map": "/honey-assistant/static/css/main.e6c13ad2.css.map",
-    "main.137c789a.js.map": "/honey-assistant/static/js/main.137c789a.js.map",
+    "main.29eb5f56.css.map": "/honey-assistant/static/css/main.29eb5f56.css.map",
+    "main.bc2ea6b0.js.map": "/honey-assistant/static/js/main.bc2ea6b0.js.map",
     "592.de6bc53b.chunk.js.map": "/honey-assistant/static/js/592.de6bc53b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.137c789a.js"
+    "static/css/main.29eb5f56.css",
+    "static/js/main.bc2ea6b0.js"
   ]
 }
