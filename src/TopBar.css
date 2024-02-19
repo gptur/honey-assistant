@@ -2,14 +2,19 @@
   
   @font-face {
     font-family: 'Gilroy';
-    src: url('fonts/Gilroy-Medium.ttf') format('truetype');
+    src: url('./fonts/Gilroy-Medium.ttf') format('truetype');
   }
 
 
   
   @font-face {
     font-family: 'Glendale';
-    src: url('fonts/glendale2.ttf') format('truetype');
+    src: url('./fonts/glendale2.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    src: url('./fonts/Inter-Regular.ttf') format('truetype');
   }
 
 
