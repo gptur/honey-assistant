@@ -1,0 +1,35 @@
+{
+    "1": [
+      { "from": "JFK", "to": "LAX", "price": 300, "departure": "08:00", "arrival": "11:00", "airline": "Delta" },
+      { "from": "LAX", "to": "JFK", "price": 350, "departure": "12:00", "arrival": "19:00", "airline": "American Airlines" }
+    ],
+    "2": [
+      { "from": "YYZ", "to": "YVR", "price": 250, "departure": "09:00", "arrival": "12:00", "airline": "Air Canada" },
+      { "from": "YVR", "to": "YYZ", "price": 280, "departure": "13:00", "arrival": "20:00", "airline": "WestJet" }
+    ],
+    "3": [
+      { "from": "MEX", "to": "CUN", "price": 200, "departure": "10:00", "arrival": "11:30", "airline": "Aeroméxico" },
+      { "from": "CUN", "to": "MEX", "price": 180, "departure": "12:30", "arrival": "14:00", "airline": "VivaAerobus" }
+    ],
+    "4": [
+      { "from": "GRU", "to": "SDU", "price": 150, "departure": "11:00", "arrival": "12:30", "airline": "LATAM Brasil" },
+      { "from": "SDU", "to": "GRU", "price": 160, "departure": "13:30", "arrival": "15:00", "airline": "Azul Brazilian Airlines" }
+    ],
+    "5": [
+      { "from": "LHR", "to": "JFK", "price": 400, "departure": "09:00", "arrival": "13:00", "airline": "British Airways" },
+      { "from": "JFK", "to": "LHR", "price": 420, "departure": "14:00", "arrival": "18:00", "airline": "Virgin Atlantic" }
+    ],
+    "6": [
+      { "from": "TXL", "to": "FRA", "price": 200, "departure": "10:30", "arrival": "12:00", "airline": "Lufthansa" },
+      { "from": "FRA", "to": "TXL", "price": 180, "departure": "13:30", "arrival": "15:00", "airline": "Eurowings" }
+    ],
+    "7": [
+      { "from": "CDG", "to": "ORY", "price": 100, "departure": "11:00", "arrival": "12:00", "airline": "Air France" },
+      { "from": "ORY", "to": "CDG", "price": 90, "departure": "13:30", "arrival": "14:30", "airline": "EasyJet" }
+    ],
+    "8": [
+      { "from": "HND", "to": "ITM", "price": 120, "departure": "10:00", "arrival": "11:00", "airline": "All Nippon Airways" },
+      { "from": "ITM", "to": "HND", "price": 110, "departure": "12:30", "arrival": "13:30", "airline": "Japan Airlines" }
+    ]
+  }
+  

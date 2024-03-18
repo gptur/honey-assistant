@@ -1,11 +1,15 @@
+// App.js
+import Topbar from './Topbar';
+import LeftSidebar from './Leftbar';
+import RightSidebar from './Sidebar';
+import { Container, Grid, Paper } from '@mui/material';
+
 import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import Sidebar from './Sidebar';
 import { fetchFlightOffers } from './FlightAPI';
 import airportCodes from './airport_codes.json';
 
-import TopBar from './TopBar';
-
+import places_json from './places.json'
 
 function MapboxComponent() {
   const [selectedPin, setSelectedPin] = useState("");
@@ -13,7 +17,9 @@ function MapboxComponent() {
   const [loading, setLoading] = useState(false);
   const [startDate, setStartDate] = useState( '');
   const [endDate, setEndDate] = useState( '');
-
+  const [departure, setDeparture] = useState(null);
+  const [arrival, setArrival] = useState(null);
+  
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnJhbmNpc2NvY2FsZGFzIiwiYSI6ImNsc2Y5MDYyNzFhNnUyamw1bjhsbTc3bjAifQ.4ypYMELBLioE2ZVgf9pfjA';
 
@@ -26,18 +32,15 @@ function MapboxComponent() {
 
     map.on('load', () => {
       // Load an image from an external URL.
-      map.loadImage('https://cdn-icons-png.flaticon.com/256/2776/2776067.png', (error, image) => {
+      map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Simple_orange_circle.svg/30px-Simple_orange_circle.svg.png?20220311203936', (error, image) => {
         if (error) throw error;
         // Add the loaded image to the style's sprite with the ID 'kitten'.
         map.addImage('pin', image);
+        map.setLayoutProperty("country-label","text-padding",5)
       });
 
-      fetch('places.json')
-        .then(function(response){
-          return response.json()
-        })
-        .then(data => {
-          var places = data.features;
+          var places = places_json.features;
+          
 
           map.addSource('places', {
             'type': 'geojson',
@@ -60,29 +63,37 @@ function MapboxComponent() {
                 'icon-image': 'pin', // Mapbox marker icon
                 'icon-allow-overlap': true,
                 'text-allow-overlap': true,
-                'icon-size': 0.1,
-                'icon-offset':[0,-100],
+                'icon-size': .4,
+                //'icon-offset':[0,-100],
               },
               'paint': {}
             });
 
-            // Add label
-            map.addLayer({
-              'id': 'label-' + place.properties.title,
-              'type': 'symbol',
-              'source': 'places',
-              'layout': {
-                'text-field': ['get', 'title'],
-                'text-font': ['Open Sans Regular'],
-                'text-size': 16,
-                'text-anchor': 'top',
-                'text-offset': [0, -3],
-                'icon-allow-overlap': true
-              },
-              'paint': {
-                'text-color': '#000000'
-              },
-            });
+            // // Add label
+            // map.addLayer({
+            //   'id': 'label-' + place.properties.title,
+            //   'type': 'symbol',
+            //   'source': 'places',
+            //   'layout': {
+            //     'text-field': ['get', 'title'],
+            //     'text-font': ['Open Sans Regular'],
+            //     'text-size': 16,
+            //     'text-anchor': 'top',
+            //     'text-offset': [0, -3],
+            //     'icon-allow-overlap': true
+            //   },
+            //   'paint': {
+            //     'text-color': '#000000'
+            //   },
+          //   // });
+          
+
+          });
+          places.forEach(function (place) {
+            var coordinates = place.geometry.coordinates;
+
+            
+
 
             // Add line from Lisbon to place
             map.addLayer({
@@ -107,7 +118,7 @@ function MapboxComponent() {
                 'line-cap': 'round'
               },
               'paint': {
-                'line-color': '#4264fb',
+                'line-color': 'green',
                 'line-width': 2
               }
             });
@@ -119,10 +130,10 @@ function MapboxComponent() {
           });
 
           setLoading(false); // Set loading to false after data is loaded
-        });
     });
   }, []);
 
+  
 
 const fetchFlights = async (destinationId) => {
   try {
@@ -158,16 +169,23 @@ const fetchFlights = async (destinationId) => {
 };
 
 
-
   return (
-    <div>
-      <div id="map" style={{ position: 'fixed', top: '119px', bottom: 0, left: 0, right:"308px"  }}></div>
-
-                  <Sidebar selectedPin={selectedPin} flights={flights} loading={loading}/>
-                  <TopBar className="top-bar" startDate={startDate} endDate={endDate} onStartDateChange={setStartDate} onEndDateChange={setEndDate} fetchFlights={fetchFlights} selectedPin_id={selectedPin.id}/>
-
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <Topbar
+        departure={departure}
+        setDeparture={setDeparture}
+        arrival={arrival}
+        setArrival={setArrival}
+      />
+      <div style={{ display: 'flex', height: 'calc(100vh - 64px)' }}>
+        <LeftSidebar selectedCountry={arrival} />
+        <div style={{ flex: 6 }}>
+          <div id="map" style={{ height: '100%', overflowY: 'auto' }}></div>
+        </div>
+        <RightSidebar selectedCountry={arrival} />
+      </div>
     </div>
   );
-}
+};
 
 export default MapboxComponent;

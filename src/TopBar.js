@@ -1,73 +1,68 @@
-import React, { useEffect } from 'react';
-import './TopBar.css';
+// Topbar.js
+import React from 'react';
+import { AppBar, Toolbar, TextField, Button, Grid } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import countriesData from './countries.json';
 
-function TopBar({ startDate, endDate, onStartDateChange, onEndDateChange, fetchFlights, selectedPin_id }) {
-  useEffect(() => {
-    if (endDate !== '') { // Ensure endDate is not empty before calling fetchFlights
-      fetchFlights(selectedPin_id);
-    }
-  }, [endDate, selectedPin_id]);
-  
+const Topbar = ({ departure, setDeparture, arrival, setArrival, selectedCountry, setSelectedCountry }) => {
+  const handleSearch = () => {
+    // Perform search or any other action
+  };
+
   return (
-    <div className="container">
-        <div className="logo">
-            <span className="logo-text">ANYWHERE</span>
-            <span className="logo-sub-text">By GPTur</span>
-          </div>
-        <div className='search-info'>  
-          <div className="from-to">
-            <div className="from-to-div-value">
-              <span className="search-info-label">From</span>
-              <span className="from-to-choice-text">Lisbon</span>
-            </div>
-            <div className="frame">
-              <div className="group">
-                <img src="airplane.svg" alt="Vector7150" className="vector" />
-              </div>
-            </div>
-            <div className="from-to-div-value">
-              <span className="search-info-label">To</span>
-              <span className="from-to-choice-text">Anywhere</span>
-            </div>
-          </div>
-          <div className="date">
-            <div className="from">
-              <span className="search-info-label">Departure</span>
-              <input type="date" id="startDate" className='from-to-choice-date' value={startDate} onChange={function(e) {
-                onStartDateChange(e.target.value)
-                }} />
-            </div>
-            <div className="iconplane">
-              <div className="i-go1-ca2">
-                <div className="group1">
-                  <img src="calendar_ico.svg" alt="Vector7152" className="vector1" />
-                </div>
-              </div>
-            </div>
-            <div className="to">
-              <span className="search-info-label">Return</span>
-              <input type="date" id="endDate" className='from-to-choice-date' value={endDate} onChange={(e) => {
-                onEndDateChange(e.target.value)
-              }} />
-            </div>
-          </div>
-          <div className="search-info-dropdown">
-            <span className="search-info-dropdown-label">Round Trip</span>
-            <img src="arrow_down_ico.svg" alt="Polygonicon7152" className="polygonicon" />
-          </div>
-          <div className="search-info-dropdown">
-            <div className="y-z-kw-h8tif1">
-              <div className="group2">
-                <img src="person_ico.svg" alt="Vector7153" className="vector3" />
-              </div>
-            </div>
-            <span className="search-info-dropdown-label">1</span>
-            <img src="arrow_down_ico.svg" alt="Vector7153" className="vector4" />
-          </div>
-        </div>
-        <div> </div>
-      </div>
+    <AppBar position="static">
+      <Toolbar>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item>
+            <Autocomplete
+              id="departure-autocomplete"
+              options={countriesData}
+              getOptionLabel={(option) => option.name}
+              onChange={(_, value) => setDeparture(value)}
+              value={departure}
+              renderInput={(params) => <TextField {...params} label="Departure" variant="outlined" />}
+            />
+          </Grid>
+          <Grid item>
+            <Autocomplete
+              id="arrival-autocomplete"
+              options={countriesData}
+              getOptionLabel={(option) => option.name}
+              onChange={(_, value) => setArrival(value)}
+              value={arrival}
+              renderInput={(params) => <TextField {...params} label="Arrival" variant="outlined" />}
+            />
+          </Grid>
+          <Grid item>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Departure Date"
+                inputFormat="MM/DD/YYYY"
+                renderInput={(params) => <TextField {...params} variant="outlined" />}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Arrival Date"
+                inputFormat="MM/DD/YYYY"
+                renderInput={(params) => <TextField {...params} variant="outlined" />}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" onClick={handleSearch}>
+              Search
+            </Button>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
-}
+};
 
-export default TopBar;
+export default Topbar;
